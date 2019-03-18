@@ -1,0 +1,90 @@
+﻿
+@{
+    ViewData["Title"] = "ProdutosCadastrados";
+    <!--Autor:Novadson Thelus-->
+}
+@model List<Produto>;
+
+<div class="panel panel-default  col-lg-8  col-md-7 col-sm-7 col-xl divdlColor panelWidth">
+    <div class="panel-heading">
+        Produtos Cadastrados
+        <a asp-action="CadProduto" class="btn btn-success pull-right center-block btnNovoRegistro">
+            <i class="glyphicon glyphicon-plus"></i>Novo registro
+        </a>
+        <br />
+        <br />
+        <div class="form-group input-group" style="margin-bottom:-5px;">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-search colorIconEditar"></i></span>
+            <input id="myInput" placeholder="Buscar Produto por Descrição" type="text" class="form-control">
+        </div>
+    </div>
+    <table id="myTable" class="table table-bordered table-condensed  table-responsive tablebgColor">
+        <thead class="tabelaHeaderColor">
+            <tr>
+                <td>Codigo</td>
+                <td>Descricao</td>
+                <td>Categoria</td>
+                <td>Fornecedor</td>
+                <td>EstoqueMinimo</td>
+                <td>QtdEmEstoque</td>
+                <td style="text-align:center">CMV</td>
+                <td style="text-align:center" colspan="3">Ações</td>
+            </tr>
+        </thead>
+
+        @foreach (var produto in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => produto.Codigo)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(model => produto.Descricao)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => produto.Categoria)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(qtd => produto.Fornecedor.Nome)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(model => produto.EstoqueMinimo)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => produto.QtdEmEstoque)
+                </td>
+                <td>
+                    <span>R$ @Html.DisplayFor(model => produto.CMV)</span>
+                </td>
+
+
+                <td>
+                    <a title="Editar" href="@Url.Action("EditarProduto",new { id =produto.Id})"><i class="glyphicon glyphicon-edit colorIconEditar"></i></a>
+                </td>
+
+                <td>
+                    <a title="Detalhes" href="@Url.Action("DetalhesDoProduto",new { id =produto.Id})"><i class="glyphicon glyphicon-info-sign colorIconEditar"></i></a>
+                </td>
+
+                <td>
+                    <a  onclick = "return confirm('Deseja excluir esse Produto?');"
+                       title="Excluir" href="@Url.Action("ExcluirProduto",new { id =produto.Id})"><i class="glyphicon glyphicon-trash  colorIcon"></i></a>
+                </td>
+            </tr>
+        }
+    </table>
+    <br />
+    @if (Model.Count().Equals(0))
+    {
+        <span class="msmEmptyTable">
+            Não há Produto cadastrado...
+        </span>
+    }
+</div>
+
+@section Scripts{
+    <script src="~/js/site.js"></script>
+}

@@ -1,0 +1,57 @@
+﻿@model Produto
+
+@{
+    ViewData["Title"] = "DetalhesDoProduto";
+    <!--Autor:Novadson Thelus-->
+}
+<div class="panel panel-default  pull-right col-lg-8  col-md-7 col-sm-7 col-xl divdlColor panelWidth">
+    <div class="panel-heading">Detalhe do Produto</div>
+    <dl class="dl-horizontal panel panel-default dlColor">
+        <dt class="col-lg-3">
+            <label class="control-label">Código:</label>
+        </dt>
+        <dd class="col-lg-3">
+            @Html.DisplayFor(model => model.Codigo)
+        </dd>
+        <dt class="col-lg-3">
+            <label class="control-label">Descrição:</label>
+        </dt>
+        <dd class="col-lg-3">
+            @Html.DisplayFor(model => model.Descricao)
+        </dd>
+        <dt class="col-lg-3">
+            <label class="control-label">Estoque mínino:</label>
+        </dt>
+        <dd class="col-lg-3">
+            @Html.DisplayFor(model => model.EstoqueMinimo)
+        </dd>
+        <dt class="col-lg-3">
+            <label class="control-label">Qtd em Estoque:</label>
+        </dt>
+        <dd class="col-lg-3">
+            @Html.DisplayFor(model => model.QtdEmEstoque)
+        </dd>
+        <dt class="col-lg-3">
+            <label class="control-label">Preço de Venda:</label>
+        </dt>
+        <dd class="col-lg-3">
+            <span>R$ @Html.DisplayFor(model => model.CMV)</span>
+        </dd>
+        <dt class="col-lg-3">
+            <label class="control-label">Categoria:</label>
+        </dt>
+        <dd class="col-lg-3">
+            @Html.DisplayFor(model => model.Categoria)
+        </dd>
+        <dt class="col-lg-3">
+            <label class="control-label">Fornecedor:</label>
+        </dt>
+        <dd class="col-lg-3">
+            @Html.DisplayFor(model => model.Fornecedor.Nome)
+        </dd>
+    </dl>
+
+    <div class="form-group">
+        <a asp-action="ProdutosCadastrados" class="btn btn-info"><i class="glyphicon glyphicon-backward"></i>Voltar</a>
+    </div>
+</div>

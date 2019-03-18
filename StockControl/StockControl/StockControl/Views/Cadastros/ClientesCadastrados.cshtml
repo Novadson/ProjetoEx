@@ -1,0 +1,106 @@
+﻿
+@{
+    ViewData["Title"] = "ClientesCadastrados";
+    <!--Autor:Novadson Thelus-->
+}
+@model List<Cliente>;
+
+<div class="panel panel-default  col-lg-8  col-md-7 col-sm-7 col-xl divdlColor panelWidth">
+    <div class="panel-heading">
+        Clientes Cadastrados
+        <a asp-action="CadCliente" class="btn btn-success pull-right center-block btnNovoRegistro">
+            <i class="glyphicon glyphicon-plus"></i>Novo registro
+        </a>
+        <br />
+        <br />
+        <div class="form-group input-group" style="margin-bottom:-5px;">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-search colorIconEditar"></i></span>
+            <input id="myInput" placeholder="Buscar cliente por nome" type="text" class="form-control">
+        </div>
+    </div>
+    <table id="myTable" class="table table-bordered display  table-condensed tablebgColor table-responsive">
+        <thead class="tabelaHeaderColor" infoEmpty="nação ">
+            <tr>
+                <td>Nome</td>
+                <td>Cpf/Cnpj</td>
+                <td>UF</td>
+                <td>Cidade</td>
+                <td>Email</td>
+                <td>Contato</td>
+                <td>Status</td>
+                <td style="text-align:center" colspan="3">Ações</td>
+            </tr>
+        </thead>
+
+        @foreach (var cliente in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => cliente.Nome)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(model => cliente.CpfCnpj)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => cliente.Uf)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(qtd => cliente.Cidade)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(model => cliente.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => cliente.Celular)
+                </td>
+                @if (cliente.Status.Equals(true))
+                {
+                    <td>
+                        <div class="statusAtivo">
+                            Ativo
+                        </div>
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        <div class="statusInativo">
+                            Inativo
+                        </div>
+                    </td>
+                }
+
+                <td>
+                    <a title="Editar" href="@Url.Action("EditarCliente",new { id =cliente.Id})"><i class="glyphicon glyphicon-edit colorIconEditar"></i></a>
+                </td>
+
+                <td>
+                    <a title="Detalhes" href="@Url.Action("DetalhesDoCliente",new { id =cliente.Id})"><i class="glyphicon glyphicon-info-sign colorIconEditar"></i></a>
+                </td>
+
+                <td>
+                    <a 
+                    <a  onclick = "return confirm('Deseja excluir esse Cliente?');"
+                       title="Excluir" href="@Url.Action("ExcluirCliente",new { id =cliente.Id})"><i class="glyphicon glyphicon-trash  colorIcon"></i></a>
+                </td>
+            </tr>
+        }
+    </table>
+
+    <br />
+    @if (Model.Count().Equals(0))
+    {
+        <span class="msmEmptyTable">
+            Não há Cliente cadastrado...
+        </span>
+    }
+</div>
+@section Scripts{ 
+<script src="~/js/site.js"></script>
+}
+
+
+

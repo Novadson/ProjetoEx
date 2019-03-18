@@ -1,0 +1,152 @@
+﻿@{
+    ViewData["Title"] = "CadFuncionario";
+    <!--Autor:Novadson Thelus-->
+}
+
+@model Funcionario;
+
+@using (Html.BeginForm("CadastrarFuncionario", "Cadastros", FormMethod.Post))
+{
+    <style>
+        .row {
+            margin-left: 10px;
+            margin-right: 10px;
+        }
+    </style>
+    <div class="panel panel-default  pull-right col-lg-8  col-md-7 col-sm-7 col-xl panelWidth">
+        <div class="panel-heading">Cadastro de Funcionários</div>
+        <div class="row">
+            <div class="col-md-6 col-xs-6">
+                <div class="form-group">
+                    <label asp-for="Nome" class="control-label">Nome Completo:</label>
+                    <input asp-for="Nome" class="form-control" placeholder="Digite o seu nome completo" type="text" />
+                    <span asp-validation-for="Nome" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-6 col-xs-6">
+                <div class="form-group">
+                    <label asp-for="NumeroMatricula" class="control-label">Número da Matrícula:</label>
+                    <input asp-for="NumeroMatricula" class="form-control" type="text" placeholder="Matrícula do funcionário" />
+                    <span asp-validation-for="NumeroMatricula" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 col-xs-6">
+                <div class="form-group">
+                    <label asp-for="DataNascimento" class="control-label">Data de Nascimento:</label>
+                    <input type="date" asp-for="DataNascimento" date-util format="dd/MM/yyyy" class="form-control" />
+                    <span asp-validation-for="DataNascimento" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-6 col-xs-6">
+                <div class="form-group">
+                    <label asp-for="Genero" class="control-label">Gênero:</label>
+                    <select asp-for="Genero" class="form-control">
+                        <option selected disabled>Selecione o Gênero</option>
+                        <option value="Masculino">Masculino</option>
+                        <option value="Feminino">Feminino</option>
+                    </select>
+                    <span asp-validation-for="Genero" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 col-xs-6">
+                <div class="form-group">
+                    <label asp-for="Cpf" class="control-label">Cpf:</label>
+                    <input data-mask="999.999.999-99" asp-for="Cpf" class="form-control" placeholder="999.999.999-99" />
+                    <span asp-validation-for="Cpf" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-6 col-xs-6">
+                <div class="form-group">
+                    <label asp-for="Rg" class="control-label">Rg:</label>
+                    <input data-mask="99.999.999-9" asp-for="Rg" class="form-control" placeholder="99.999.999-9" />
+                    <span asp-validation-for="Rg" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-xs-6">
+                <div class="form-group">
+                    <label asp-for="Email" class="control-label">Email:</label>
+                    <input asp-for="Email" class="form-control" placeholder="nome@gmail.com" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-6 col-xs-6">
+                <div class="form-group">
+                    <label asp-for="Celular" class="control-label">Contato:</label>
+                    <input asp-for="Celular" class="form-control tel" placeholder="(45)99969-2568" />
+                    <span asp-validation-for="Celular" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 col-xs-6">
+                <div class="form-group">
+                    <label asp-for="GrauEscolaridade" class="control-label">Grau de escolaridade:</label>
+                    <select asp-for="GrauEscolaridade" class="form-control" required="required">
+                        <option selected disabled>--Selecione Grau de escolaridade--</option>
+                        <option value="Analfabeto">Analfabeto</option>
+                        <option value="Ens_F_incompleto">Ensino fundamental incompleto</option>
+                        <option value="Ens_F_completo">Ensino fundamental completo</option>
+                        <option value="Ens_M_incompleto">Ensino médio incompleto</option>
+                        <option value="Ens_M_completo">Ensino médio completo</option>
+                        <option value="S_Incompleto">Superior incompleto</option>
+                        <option value="S_Completo">Superior completo</option>
+                        <option value="Pós-Graduação">Pós-Graduação</option>
+                        <option value="Mestrado">Mestrado</option>
+                        <option value="Doutorado">Doutorado</option>
+                        <option value="Pòs-Doutorado ">Pòs-Doutorado</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-xs-6">
+                <div class="form-group">
+                    <label asp-for="Ocupacao" class="control-label">Ocupação:</label>
+                    <select asp-for="Ocupacao" class="form-control" required="required">
+                        <option selected disabled="disabled">--Selecione a Ocupação--</option>
+                        <option value="Gerente">Gerente</option>
+                        <option value="Subgerente ">Subgerente</option>
+                        <option value="Secretaria">Secretario(a)</option>
+                        <option value="Vendedor">Vendedor(a)</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 col-xs-6" style="margin-top:15px">
+                <div class="form-group ">
+                    <button id="btnSalvar" onclick="Confirm()" type="Submit" class="btn btn-success"><i class="glyphicon glyphicon-saved"></i>Salvar</button>
+                    <a asp-action="FuncionariosCadastrados" class="btn btn-info"><i class="glyphicon glyphicon-backward"></i>Voltar</a>
+                </div>
+            </div>
+            <div style="margin-top:15px">
+                <div class="col-md-6 col-xs-6">
+                    <div class="form-group">
+                        <label class="col-lg-4 col-md-2 control-label" id="labelTOP">Ativar</label>
+                        <input name="Status" value="true" type="checkbox" class="option-input checkbox col-lg-2" checked />
+                    </div>
+                </div>
+                <span asp-validation-for="Status" class="text-danger"></span>
+            </div>
+
+        </div>
+    </div>
+
+    @if (Model != null)
+    {
+        <input type="number" class="none" name="Id" value="@Model.Id" />
+    }
+}
+@section Scripts{
+    <script src="~/js/site.js"></script>
+}
+

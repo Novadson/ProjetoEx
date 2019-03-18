@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20190302004147_Fornecedor.cs" />
+    <Compile Remove="Migrations\20190302004147_Fornecedor.Designer.cs" />
+    <Compile Remove="Migrations\20190303131529_StatusBool.cs" />
+    <Compile Remove="Migrations\20190303131529_StatusBool.Designer.cs" />
+    <Compile Remove="Migrations\20190307215249_Cliente.cs" />
+    <Compile Remove="Migrations\20190307215249_Cliente.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Areas\Identity\Pages\__ViewStart.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+  </ItemGroup>
+
+</Project>

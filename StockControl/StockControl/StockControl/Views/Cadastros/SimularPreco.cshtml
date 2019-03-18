@@ -1,0 +1,40 @@
+﻿@model SimularPreco
+
+@{
+    ViewData["Title"] = "SimularPreco";
+    <!--Autor:Novadson Thelus-->
+}
+
+@using (Html.BeginForm("SimularPreco", "Cadastros", FormMethod.Post))
+{
+
+    <div class="panel panel-default  pull-right col-lg-8  col-md-7 col-sm-7 col-xl panelWidth">
+        <div class="panel-heading">Simular preço de Produto</div>
+        <div class="row">
+            <div class="col-md-6 col-xs-6">
+                <div class="form-group">
+                    <label asp-for="PrecoCompra" class="control-label">Preço de Compra:</label>
+                    <input asp-for="PrecoCompra" class="form-control" placeholder="Digite o valor de Compra" required />
+                    <span asp-validation-for="PrecoCompra" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-6 col-xs-6">
+                <div class="form-group">
+                    <label asp-for="MargeLucro" class="control-label"></label>
+                    <input asp-for="MargeLucro" class="form-control" type="number" placeholder="Digite a margem de Lucro" required />
+                    <span asp-validation-for="MargeLucro" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-xs-6">
+                <div class="form-group ">
+                    <button id="btnSalvar" type="Submit" class="btn btn-success"><i class="glyphicon glyphicon-usd"></i>Calcular Lucro</button>
+                    <a asp-action="ProdutosCadastrados" class="btn btn-info"><i class="glyphicon glyphicon-backward"></i>Voltar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+

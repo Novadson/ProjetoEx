@@ -1,0 +1,93 @@
+﻿@{
+    ViewData["Title"] = "UsuariosCadastrados";
+    <!--Autor:Novadson Thelus-->
+}
+
+@model List<Usuario>;
+
+<div class="panel panel-default  col-lg-8  col-md-7 col-sm-7 col-xl divdlColor panelWidth">
+    <div class="panel-heading">
+        Usuários Cadastrados
+        <a asp-action="CadUsuario" class="btn btn-success pull-right center-block btnNovoRegistro">
+            <i class="glyphicon glyphicon-plus"></i>Novo registro
+        </a>
+        <br />
+        <br />
+        <div class="form-group input-group" style="margin-bottom:-5px;">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-search colorIconEditar"></i></span>
+            <input id="myInput" placeholder="Buscar usuário por nome" type="text" class="form-control">
+        </div>
+    </div>
+    <table id="myTable" class="table table-bordered table-condensed table-responsive tablebgColor">
+        <thead class="tabelaHeaderColor">
+            <tr>
+                <td>Nome</td>
+                <td>Email</td>
+                <td>Contato</td>
+                <td>Status</td>
+                <td style="text-align:center" colspan="3">Ações</td>
+            </tr>
+        </thead>
+
+        @foreach (var usuario in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => usuario.Nome)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(model => usuario.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => usuario.Celular)
+                </td>
+
+                @if (usuario.Status.Equals(true))
+                {
+                    <td>
+                        <div class="statusAtivo">
+                            Ativo
+                        </div>
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        <div class="statusInativo">
+                            Inativo
+                        </div>
+                    </td>
+                }
+
+                <td>
+                    <a title="Editar" href="@Url.Action("EditarUsuario",new { id =usuario.Id})"><i class="glyphicon glyphicon-edit colorIconEditar"></i></a>
+                </td>
+
+                <td>
+                    <a title="Detalhes" href="@Url.Action("DetalhesDoUsuario",new { id =usuario.Id})"><i class="glyphicon glyphicon-info-sign colorIconEditar"></i></a>
+                </td>
+
+                <td>
+
+                    <a onclick = "return confirm('Deseja excluir essa Venda?');"
+                       title="Excluir" href="@Url.Action("ExcluirUsuario",new { id =usuario.Id})"><i class="glyphicon glyphicon-trash  MyLink colorIcon"></i></a>
+                </td>
+            </tr>
+        }
+    </table>
+    <br />
+    @if (Model.Count().Equals(0))
+    {
+        <span class="msmEmptyTable">
+            Não há Usuário cadastrado...
+        </span>
+    }
+</div>
+
+@section Scripts{
+    <script src="~/js/bootbox.min.js"></script>
+}
+
+
+

@@ -1,0 +1,90 @@
+﻿@model VendaViewModel;
+
+@{
+    ViewData["Title"] = "CadVenda";
+    <!--Autor:Novadson Thelus-->
+}
+
+}
+@using (Html.BeginForm("CadastrarVenda", "Cadastros", FormMethod.Post))
+{
+    <style>
+        .row {
+            margin-left: 10px;
+            margin-right: 10px;
+        }
+    </style>
+
+    <div class="panel panel-default  pull-right col-lg-8  col-md-7 col-sm-7 col-xl panelWidth">
+        <div class="panel-heading">Cadastro de Vendas</div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="control-label">Vendedor:</label>
+                    <select name="SelectedFuncionario" asp-for="GetVenda.Funcionario.Id"
+                            asp-items="@( new SelectList(Model.GetFuncionarios, "Id", "Nome"))" required class="form-control"></select>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="control-label">Produto:</label>
+                    <select name="SelectedProduto" asp-for="GetVenda.Produto.Id"
+                            asp-items="@( new SelectList(Model.GetProdutos, "Id", "Descricao"))" required class="form-control"></select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="control-label">Cliente:</label>
+                    <select name="SelectedCliente" asp-for="GetVenda.Cliente.Id"
+                            asp-items="@( new SelectList(Model.GetClientes, "Id", "Nome"))" required class="form-control"></select>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="GetVenda.Quantidade" class="control-label">Quantidade de Item:</label>
+                    <input asp-for="GetVenda.Quantidade" class="form-control" placeholder="Digita a quantidade de item" />
+                    <span asp-validation-for="GetVenda.Quantidade" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="GetVenda.Comissao" class="control-label">Comissão de Vendedor:</label>
+                    <input asp-for="GetVenda.Comissao" class="form-control" placeholder="Digite o valor da comissão" />
+                    <span asp-validation-for="GetVenda.Comissao" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-6 col-xs-6">
+                <div class="form-group">
+                    <label asp-for="GetVenda.Tipo" class="control-label">Tipo:</label>
+                    <select asp-for="GetVenda.Tipo" class="form-control" required="required">
+                        <option selected disabled="disabled">--Selecione o tipo--</option>
+                        <option value="Venda">Venda</option>
+                        <option value="Orçamento">Orçamento</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group ">
+                    <button id="btnSalvar" onclick="Confirm()" type="Submit" class="btn btn-success"><i class="glyphicon glyphicon-saved"></i>Salvar</button>
+                    <a asp-action="VendasCadastradas" class="btn btn-info"><i class="glyphicon glyphicon-backward"></i>Voltar</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    @if (Model.GetVenda != null)
+    {
+        <input type="number" class="none" name="Id" value="@Model.GetVenda.Id" />
+    }
+}

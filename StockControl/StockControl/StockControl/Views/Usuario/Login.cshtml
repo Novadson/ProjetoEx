@@ -1,0 +1,90 @@
+﻿
+@{
+    Layout = null;
+}
+@model Usuario
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="https://fonts.googleapis.com/css?family=Black+Ops+One" rel="stylesheet">
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+    <link href="~/css/login.css" rel="stylesheet" />
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.rawgit.com/mdehoog/Semantic-UI/6e6d051d47b598ebab05857545f242caf2b4b48c/dist/semantic.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://code.jquery.com/jquery-2.1.4.js"></script>
+    <script src="https://cdn.rawgit.com/mdehoog/Semantic-UI/6e6d051d47b598ebab05857545f242caf2b4b48c/dist/semantic.min.js"></script>
+
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="~/js/login.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Monoton" rel="stylesheet">
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.rawgit.com/mdehoog/Semantic-UI/6e6d051d47b598ebab05857545f242caf2b4b48c/dist/semantic.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://code.jquery.com/jquery-2.1.4.js"></script>
+    <script src="https://cdn.rawgit.com/mdehoog/Semantic-UI/6e6d051d47b598ebab05857545f242caf2b4b48c/dist/semantic.min.js"></script>
+</head>
+<body id="body">
+
+    <nav class="navbar navbar-ligh col-lg-12  col-md-12 col-sm-12 col-xl">
+        <h1 align="center" style="color:#4a75f7;font-family:'Black Ops One',
+    cursive;font-size:75px;margin-top:10px;margin-left:120px;text-shadow:2px 2px white;">
+            Stock Control
+        </h1>
+        @if (Model == null)
+        {
+        <div style="position:absolute;margin-top:-46px">
+            <p style="color:#073ab4;text-shadow: 1px 1px white;
+font-size:20px;font-weight:bolder;margin-left:1090px;margin-top:-20px">Olá visitante</p>
+        </div>
+
+        }
+        <a style="color:#073ab4;text-shadow: 1px 1px white;font-size:16px" class="pull-right" id="test">
+            <i style="color:#073ab4;text-shadow: 1px 1px white;font-size:18px"class="glyphicon glyphicon-log-in"></i>
+            Acesse
+        </a>
+
+    </nav>
+
+    <div class="ui modal test" style="width:300px;height:300px;margin:-120PX;background:#668cff;">
+        <div class="ui middle aligned center aligned grid">
+            <div class="column">
+                <h2 style="color:white;margin-top:10px
+                     ;text-shadow:2px 2px #668cff;font-family:'Black Ops One',cursive;">
+                    Acesse sua conta
+                </h2>
+                @using (Html.BeginForm("LogarSe", "Usuario", FormMethod.Post, new { @class = "ui large form " }))
+                {
+                    <div class="ui  segment">
+                        <br />
+                        <div class="field">
+                            <div class="form-group">
+                                <div class="ui left icon input">
+                                    <i class="user icon"></i>
+                                    @Html.TextBoxFor(model => model.EmailLogin, null, new { @class = "large form-control", placeholder = "Endereço E-mail/Login", type = "text", @style = "width:268px" })
+                                </div>
+                                @Html.ValidationMessageFor(model => model.EmailLogin, null, new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <div class="form-group">
+                                <div class="ui left icon input">
+                                    <i class="lock icon"></i>
+                                    @Html.TextBoxFor(model => model.Senha, null, new { @class = "form-control", placeholder = "Digite sua senha", type = "password", @style = "width:268px" })
+                                </div>
+                                @Html.ValidationMessageFor(model => model.Senha, null, new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <input class="ui fluid large primary submit button glyphicon glyphicon-log-in" type="submit" name="login" value="Login" style="color:white;background:#668cff;">
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</body>
+</html>

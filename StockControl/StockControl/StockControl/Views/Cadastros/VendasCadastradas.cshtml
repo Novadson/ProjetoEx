@@ -1,0 +1,115 @@
+﻿
+@{
+    ViewData["Title"] = "VendasCadastradas";
+}
+@model List<Venda>
+
+<div class="panel panel-default  col-lg-8  col-md-7 col-sm-7 col-xl divdlColor panelWidth">
+    <div class="panel-heading">
+        Vendas Cadastradas
+        <a asp-action="CadVenda" class="btn btn-success pull-right center-block btnNovoRegistro">
+            <i class="glyphicon glyphicon-plus"></i>Novo registro
+        </a>
+        <br />
+        <br />
+        <div class="form-group input-group" style="margin-bottom:-5px;">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-search colorIconEditar"></i></span>
+            <input id="myInput" placeholder="Buscar venda por vendedor" type="text" class="form-control">
+        </div>
+    </div>
+    <table id="myTable" class="table table-bordered table-condensed table-responsive tablebgColor">
+        <thead class="tabelaHeaderColor">
+            <tr>
+                <td>Vendedor</td>
+                <td>Descrição do Produto</td>
+                <td>Nome do Cliente</td>
+                <td>Qtde Produto</td>
+                <td>Valor Unitário</td>
+                <td>Valor Total</td>
+                <td align="center">Status</td>
+                <td style="text-align:center" colspan="4">Ações</td>
+            </tr>
+        </thead>
+        @foreach (var venda in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => venda.Funcionario.Nome)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(model => venda.Produto.Descricao)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => venda.Cliente.Nome)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(qtd => venda.Quantidade)
+                </td>
+
+                <td>
+                    R$ @Html.DisplayFor(model => venda.PrecoUnitario)
+                </td>
+                <td>
+                    R$ @Html.DisplayFor(model => venda.ValorTotal)
+                </td>
+
+                @if (venda.Quantidade > 0 && venda.Tipo.Equals("Venda"))
+                {
+                    <td>
+                        <div class="statusFechada">
+                            Fechada
+                        </div>
+                    </td>
+                }
+                else if (venda.Quantidade > 0 && venda.Tipo.Equals("Orçamento"))
+                {
+                    <td>
+                        <div class="statusOrcamento">
+                            Aberta
+                        </div>
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        <div class="statusCancelada">
+                            Cancelada
+                        </div>
+                    </td>
+                }
+
+                <td>
+                    <a title="Editar" href="@Url.Action("EditarVendas",new { id =venda.Id})"><i class="glyphicon glyphicon-edit colorIconEditar"></i></a>
+                </td>
+
+                <td>
+                    <a title="Detalhes" href="@Url.Action("DetalhesDaVenda",new { id =venda.Id})"><i class="glyphicon glyphicon-info-sign colorIconEditar"></i></a>
+                </td>
+
+                <td>
+                    <a title="Cancelar" href="@Url.Action("CancelarVenda",new { id =venda.Id})"><i class="glyphicon glyphicon-remove-circle  colorIcon"></i></a>
+                </td>
+
+                <td>
+                  
+                    <a  onclick = "return confirm('Deseja excluir essa Venda?');"
+                       title="Excluir" href="@Url.Action("ExcluirVenda",new { id =venda.Id})"><i class="glyphicon glyphicon-trash  colorIcon"></i></a>
+                </td>
+            </tr>
+        }
+    </table>
+    <br />
+    @if (Model.Count().Equals(0))
+    {
+        <span class="msmEmptyTable">
+            Não há Venda cadastrada...
+        </span>
+    }
+</div>
+@section Scripts{
+    <script src="~/js/site.js"></script>
+
+}
+

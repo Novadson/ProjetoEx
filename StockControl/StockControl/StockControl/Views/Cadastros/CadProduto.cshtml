@@ -1,0 +1,132 @@
+﻿@model ProdutoViewModel
+
+@{
+    ViewData["Title"] = "CadProduto";
+    <!--Autor:Novadson Thelus-->
+}
+@using (Html.BeginForm("CadastrarProduto", "Cadastros", FormMethod.Post))
+{
+    <style>
+        .row {
+            margin-left: 10px;
+            margin-right: 10px;
+        }
+    </style>
+    <div class="panel panel-default  pull-right col-lg-8  col-md-7 col-sm-7 col-xl panelWidth">
+        <div class="panel-heading">Cadastro de Produto</div>
+        <div class="row">
+            <div class="col-md-6 col-xs-6">
+                <div class="form-group">
+                    <label asp-for="GetProduto.Codigo" class="control-label"></label>
+                    <input asp-for="GetProduto.Codigo" class="form-control" type="number" />
+                    <span asp-validation-for="GetProduto.Codigo" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-xs-6">
+                <div class="form-group">
+                    <label asp-for="GetProduto.Descricao" class="control-label"></label>
+                    <input asp-for="GetProduto.Descricao" class="form-control" />
+                    <span asp-validation-for="GetProduto.Descricao" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 col-xs-6">
+                <div class="form-group">
+                    <label class="control-label">Fornecedor:</label>
+                    <select name="SelectedFornecedor" asp-for="GetProduto.Fornecedor.Id"
+                            asp-items="@( new SelectList(Model.GetFornecedores,"Id","Nome"))" required class="form-control">
+                        <option selected disabled="disabled">--Selecione o Fornecedor--</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-6 col-xs-6">
+                <div class="form-group">
+                    <label asp-for="GetProduto.Categoria" class="control-label">Categoria:</label>
+                    <select asp-for="GetProduto.Categoria" class="form-control" required="required">
+                        <option selected disabled="disabled">--Selecione o Categoria--</option>
+                        <option value="Eletrônicos">Eletrônicos</option>
+                        <option value="Informática">Informática</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 col-xs-6">
+                <div class="form-group">
+                    <label asp-for="GetProduto.QtdEmEstoque" class="control-label">Quantidade de Produto:</label>
+                    <input asp-for="GetProduto.QtdEmEstoque" class="form-control" />
+                    <span asp-validation-for="GetProduto.QtdEmEstoque" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-xs-6">
+                <div class="form-group">
+                    <label asp-for="GetProduto.EstoqueMinimo" class="control-label">Estoque Minimo:</label>
+                    <input asp-for="GetProduto.EstoqueMinimo" class="form-control" />
+                    <span asp-validation-for="GetProduto.EstoqueMinimo" class="text-danger"></span>
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-xs-6">
+                <div class="form-group">
+                    <label asp-for="GetProduto.CMV" class="control-label">Preço de Venda:</label>
+                    <input asp-for="GetProduto.CMV" class="form-control" />
+                    <span asp-validation-for="GetProduto.CMV" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-6 col-xs-6">
+                <div class="form-group ">
+                    <button onclick="Confirm()" type="Submit" class="btn btn-success"><i class="glyphicon glyphicon-saved"></i>Salvar</button>
+                    <a asp-action="ClientesCadastrados" class="btn btn-info"><i class="glyphicon glyphicon-backward"></i>Voltar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    if (Model.GetProduto != null)
+    {
+        <input type="number" class="none" name="Id" value="@(Model.GetProduto.Id)" />
+    }
+}
+<div id="myModal" class="modal-dialog modal-confirm modal fade">
+    <div class="modal-content">
+        <div class="modal-header">
+            <div class="icon-box">
+                <i class="material-icons">
+                    done
+                </i>
+            </div>
+            <h4 class="modal-title">Sucesso!</h4>
+        </div>
+        <div class="modal-body">
+            <p class="text-center">O Deposito Foi Realizado Com Sucesso</p>
+        </div>
+        <div class="modal-footer">
+
+            <a asp-controller="Usuario" asp-action="Index" class="btn btn-success btn-block">
+                <p class="centromodal">Ok</p>
+            </a>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+   
+    <script>
+     
+    </script>
+
+}
+
+
+

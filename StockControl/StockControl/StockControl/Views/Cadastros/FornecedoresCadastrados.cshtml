@@ -1,0 +1,105 @@
+﻿
+@{
+    ViewData["Title"] = "FornecedoresCadastrados";
+    <!--Autor:Novadson Thelus-->
+}
+@model List<Fornecedor>;
+
+<div class="panel panel-default  col-lg-8  col-md-7 col-sm-7 col-xl divdlColor panelWidth">
+    <div class="panel-heading">
+        Fornecedores Cadastrados
+
+        <a asp-action="CadFornecedor" class="btn btn-success pull-right center-block btnNovoRegistro">
+            <i class="glyphicon glyphicon-plus"></i>Novo registro
+        </a>
+        <br />
+        <br />
+        <div class="form-group input-group" style="margin-bottom:-5px;">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-search colorIconEditar"></i></span>
+            <input id="myInput" placeholder="Buscar Fornecedor por nome." type="text" class="form-control">
+        </div>
+    </div>
+
+    <table id="myTable" class="table table-bordered tablebgColor table-condensed table-responsive">
+        <thead class="tabelaHeaderColor">
+            <tr>
+                <td>Fornecedor</td>
+                <td>Cnpj</td>
+                <td>Estabelecimento</td>
+                <td>Uf</td>
+                <td>Cidade</td>
+                <td>Status</td>
+                <td style="text-align:center" colspan="3">Ações</td>
+            </tr>
+        </thead>
+
+        @foreach (var fornecedor in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => fornecedor.Nome)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(model => fornecedor.Cnpj)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => fornecedor.TipoEstabelecimento)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(qtd => fornecedor.Uf)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(model => fornecedor.Cidade)
+                </td>
+                @if (fornecedor.Status.Equals(true))
+                {
+                    <td>
+                        <div class="statusAtivo">
+                            Ativo
+                        </div>
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        <div class="statusInativo">
+                            Inativo
+                        </div>
+                    </td>
+                }
+
+                <td>
+                    <a title="Editar" href="@Url.Action("EditarFornecedor",new { id =fornecedor.Id})"><i class="glyphicon glyphicon-edit colorIconEditar"></i></a>
+                </td>
+
+                <td>
+                    <a title="Detalhes" href="@Url.Action("DetalhesDoFornecedor",new { id =fornecedor.Id})"><i class="glyphicon glyphicon-info-sign colorIconEditar"></i></a>
+                </td>
+
+                <td>
+                   
+                    <a  onclick = "return confirm('Deseja excluir esse Fornecedor?');"
+                       title="Excluir" href="@Url.Action("ExcluirFornecedor",new { id =fornecedor.Id})"><i class="glyphicon glyphicon-trash  MyLink colorIcon"></i></a>
+                </td>
+            </tr>
+        }
+    </table>
+    <br />
+    @if (Model.Count().Equals(0))
+    {
+        <span class="msmEmptyTable">
+            Não há Fornecedor cadastrado...
+        </span>
+    }
+</div>
+
+
+@section Scripts{
+    <script src="~/js/site.js"></script>
+}
+
+
+
